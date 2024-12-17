@@ -27,4 +27,17 @@ public class RegisterClient {
                 .then().log().all()
                 .spec(Specifications.responseSpecOK204());
     }
+
+    public RegisterResponse registerUserUnsuccess(String email) {
+        RegisterRequest registerRequest = new RegisterRequest(email, null);
+        return given()
+                .spec(Specifications.requestSpec(Endpoints.BASE_URL))
+                .body(registerRequest)
+                .when()
+                .post(Endpoints.REGISTER_USER)
+                .then().log().all()
+                .spec(Specifications.responseSpecError400())
+                .extract()
+                .as(RegisterResponse.class);
+    }
 }

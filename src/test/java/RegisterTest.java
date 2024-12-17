@@ -1,13 +1,7 @@
 import models.register.RegisterClient;
-import utils.Endpoints;
-import utils.Specifications;
 import org.junit.Assert;
 import org.junit.Test;
-import models.register.RegisterRequest;
 import models.register.RegisterResponse;
-import models.register.RegisterUnsuccess;
-
-import static io.restassured.RestAssured.*;
 
 public class RegisterTest {
 
@@ -30,16 +24,9 @@ public class RegisterTest {
 
     @Test
     public void registerUnsuccessTest() {
-        Specifications.installSpecification(Specifications.requestSpec(Endpoints.BASE_URL), Specifications.responseSpecError400());
-        String error = "Missing password";
-        RegisterUnsuccess user = new RegisterUnsuccess("eve.holt@reqres.in");
-        RegisterResponse registerResponse = given()
-                .body(user)
-                .when()
-                .post(Endpoints.REGISTER_USER)
-                .then().log().all()
-                .extract().as(RegisterResponse.class);
-        Assert.assertEquals(error, registerResponse.getError());
-
+        String expectedErrorText = "Missing password";
+        RegisterClient client = new RegisterClient();
+        RegisterResponse registerResponse = client.registerUserUnsuccess("eve.holt@reqres.in");
+        Assert.assertEquals(expectedErrorText, registerResponse.getError());
     }
 }
