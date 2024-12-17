@@ -1,4 +1,4 @@
-package models;
+package models.user;
 
 import io.qameta.allure.internal.shadowed.jackson.annotation.JsonProperty;
 

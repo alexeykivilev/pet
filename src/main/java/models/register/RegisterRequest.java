@@ -1,15 +1,15 @@
 package models.register;
 
-public class Register {
+public class RegisterRequest {
     private String email;
     private String password;
 
-    public Register(String email, String password) {
+    public RegisterRequest(String email, String password) {
         this.email = email;
         this.password = password;
     }
 
-    public Register() {
+    public RegisterRequest() {
     }
 
     public String getEmail() {
