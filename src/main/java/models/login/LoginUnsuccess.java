@@ -1,10 +1,10 @@
 package models.login;
 
-public class LoginUnsuccess extends Login {
+public class LoginUnsuccess extends LoginRequest {
     private String error;
 
-    public LoginUnsuccess(String email, String password) {
-        super(email, password);
+    public LoginUnsuccess(String email) {
+        super(email, null);
     }
 
     public LoginUnsuccess() {

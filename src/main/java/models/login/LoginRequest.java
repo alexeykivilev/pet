@@ -1,15 +1,15 @@
 package models.login;
 
-public class Login {
+public class LoginRequest {
     private String email;
     private String password;
 
-    public Login(String email, String password) {
+    public LoginRequest(String email, String password) {
         this.email = email;
         this.password = password;
     }
 
-    public Login() {
+    public LoginRequest() {
     }
 
     public String getEmail() {
