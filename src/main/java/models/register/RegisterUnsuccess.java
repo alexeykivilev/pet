@@ -1,7 +1,6 @@
 package models.register;
 
-public class RegisterUnsuccess extends Register {
-    private String email;
+public class RegisterUnsuccess extends RegisterRequest {
 
     public RegisterUnsuccess(String email) {
         super(email, null);

@@ -1,8 +1,9 @@
+import models.register.RegisterClient;
 import utils.Endpoints;
 import utils.Specifications;
 import org.junit.Assert;
 import org.junit.Test;
-import models.register.Register;
+import models.register.RegisterRequest;
 import models.register.RegisterResponse;
 import models.register.RegisterUnsuccess;
 
@@ -12,27 +13,19 @@ public class RegisterTest {
 
     @Test
     public void registerSuccessTest() {
-        Specifications.installSpecification(Specifications.requestSpec(Endpoints.BASE_URL), Specifications.responseSpecOK200());
-        Integer id = 4;
-        String token = "QpwL5tke4Pnpja7X4";
-        Register user = new Register("eve.holt@reqres.in", "pistol");
-        RegisterResponse registerResponse = given()
-                .body(user)
-                .when()
-                .post(Endpoints.REGISTER_USER)
-                .then().log().all()
-                .extract().as(RegisterResponse.class);
-        Assert.assertEquals(id, registerResponse.getId());
-        Assert.assertEquals(token, registerResponse.getToken());
+        Integer expectedId = 4;
+        String expectedToken = "QpwL5tke4Pnpja7X4";
+        RegisterClient client = new RegisterClient();
+        RegisterResponse registerResponse = client.registerUser("eve.holt@reqres.in", "pistol");
+        Assert.assertEquals(expectedId, registerResponse.getId());
+        Assert.assertEquals(expectedToken, registerResponse.getToken());
     }
 
     @Test
     public void deleteUserSuccess() {
-        Specifications.installSpecification(Specifications.requestSpec(Endpoints.BASE_URL), Specifications.responseSpecOK204());
-        given()
-                .when()
-                .delete("api/users/4")
-                .then().log().all();
+        int userId = 4;
+        RegisterClient client = new RegisterClient();
+        client.deleteUser(userId);
     }
 
     @Test
